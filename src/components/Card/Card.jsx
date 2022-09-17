@@ -1,11 +1,11 @@
 import React from 'react';
 import './Card.scss'
 
-function Card() {
+function Card({ card }) {
     return(
         <div>
             <h2 className='card'>
-                Making test task
+                {card.content}
             </h2>
         </div>
     );

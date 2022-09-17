@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import './Title.scss'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
-function Title() {
+function Title({ title }) {
     const [open, setOpen] = useState(false);
     return ( 
         <div>
             {open? (
             <div className='title'>
-                <input value="ToDo" 
+                <input 
+                    value={title} 
                     className='title__input'
                     autoFocus
                     onBlur = {() => setOpen(!open)}
@@ -17,12 +18,11 @@ function Title() {
             ) : (
             <div className='changing-title'>
                 <h1
-                    onClick={() => setOpen(!open)} 
                     className='changing-title__text'
                 >
-                    ToDo
+                    {title}
                 </h1>
-                <div className="changing-title__icon">
+                <div className="changing-title__icon" onClick={() => setOpen(!open)}>
                     <MoreHorizIcon/>
                 </div>
             </div>

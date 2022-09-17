@@ -4,14 +4,14 @@ import Card from '../Card/Card';
 import InputItem from '../Input/InputItem';
 import './List.scss'
 
-export default function List() {
+export default function List({ list }) {
     return(
         <div className='list'>
-            <Title />
-            <Card />
-            <Card />
-            <Card />
-            <InputItem />
+            <Title title={list.title}/>
+            {list.cards.map((card) => (
+                <Card key={card.id} card={card}/>
+            ))}
+            <InputItem listId={list.id}/>
         </div>
     );
 }
