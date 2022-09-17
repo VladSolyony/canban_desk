@@ -10,18 +10,18 @@ function Title() {
             <div className='title'>
                 <input value="ToDo" 
                     className='title__input'
-                    fullWidth
+                    autoFocus
                     onBlur = {() => setOpen(!open)}
                 />
             </div>
             ) : (
             <div className='changing-title'>
-                <p
+                <h1
                     onClick={() => setOpen(!open)} 
                     className='changing-title__text'
                 >
                     ToDo
-                </p>
+                </h1>
                 <div className="changing-title__icon">
                     <MoreHorizIcon/>
                 </div>

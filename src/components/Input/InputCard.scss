@@ -1,0 +1,48 @@
+.input-card {
+    display: flex;
+
+    &__input {
+        box-shadow: 0px 1px 3px rgb(133, 132, 132);
+        width: 100%;
+        margin: 0 10px 0 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: white;
+        outline: none;
+        font-weight: 400;    
+        font-size: medium;
+        padding: 10px;
+    }
+}
+
+.button-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+
+    &__add-button{
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color: rgba(26, 129, 11, 0.3);
+        margin: 0 10px 0 10px;
+        color: white;
+        transition: .2s ease;
+    }
+
+    &__add-button:hover{
+        box-shadow: 0px 1px 3px rgb(133, 132, 132);
+        transition: .2s ease;
+    }
+
+    &__clear-button{
+        cursor: pointer;
+        align-self: center;
+        transition: .2s ease;
+    }
+
+    &__clear-button:hover{
+        color: rgb(93, 92, 92);
+        transition: .2s ease;
+    }
+}

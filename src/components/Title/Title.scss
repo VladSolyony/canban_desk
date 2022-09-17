@@ -3,15 +3,18 @@
     display: flex;
     justify-content: space-between;
     flex-grow: 1;
-    height: 40px;
-    padding: 3px;
     justify-content: center;
-}
+    padding: 5px;
 
-.title__input {
-    width: 85%;
-    border: none;
-    background-color: transparent;
+    &__input {
+        width: 95%;
+        border: none;
+        background-color: transparent;
+        outline: none;
+        font-weight: bold;    
+        font-size: x-large;
+        padding: 10px;
+    }
 }
 
 .changing-title {
@@ -20,15 +23,20 @@
     flex-grow: 1;
     height: 40px;
     padding: 3px;
+    font-weight: bold;
+    box-sizing: border-box;
+
+    &__text {
+        font-size: x-large;
+        align-self: center;
+        width: 100%;
+        cursor: text;
+        padding-left: 10px;
+    }
+    
+    &__icon {
+       cursor: pointer; 
+    }
 }
 
-.changing-title__text {
-    align-self: center;
-    width: 100%;
-    cursor: text;
-    padding-left: 10px;
-}
 
-.changing-title__icon {
-   cursor: pointer; 
-}
