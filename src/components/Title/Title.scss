@@ -1,0 +1,34 @@
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    height: 40px;
+    padding: 3px;
+    justify-content: center;
+}
+
+.title__input {
+    width: 85%;
+    border: none;
+    background-color: transparent;
+}
+
+.changing-title {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    height: 40px;
+    padding: 3px;
+}
+
+.changing-title__text {
+    align-self: center;
+    width: 100%;
+    cursor: text;
+    padding-left: 10px;
+}
+
+.changing-title__icon {
+   cursor: pointer; 
+}
