@@ -1,6 +1,6 @@
 import React from 'react';
 import './Card.scss';
-import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd';
+import {Draggable} from 'react-beautiful-dnd';
 
 function Card({ card, index }) {
     return(

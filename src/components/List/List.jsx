@@ -4,7 +4,7 @@ import Card from '../Card/Card';
 import InputItem from '../Input/InputItem';
 import './List.scss';
 import { v4 as uuid } from "uuid";
-import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
+import { Droppable} from 'react-beautiful-dnd'
 
 export default function List({ list }) {
 

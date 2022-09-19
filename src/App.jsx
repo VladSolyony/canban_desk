@@ -4,7 +4,7 @@ import './App.scss';
 import { CardTitleContext } from './utils/Contexts';
 import { v4 as uuid } from "uuid";
 import InputItem from './components/Input/InputItem';
-import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
+import {DragDropContext} from 'react-beautiful-dnd'
 
 function App() {
 
@@ -15,8 +15,13 @@ function App() {
             title: 'Editable Title',
             cards: [],
         },
+        'list-2' : {
+          id: 'list-2',
+          title: 'Doing',
+          cards: [],
+      },
     },
-    listIds: ['list-1'],
+    listIds: ['list-1', 'list-2'],
   };
 
   const [data, setData] = useState(initData);
@@ -102,6 +107,27 @@ function App() {
     if (source.droppableId === destination.droppableId) {
       sourceList.cards.splice(source.index, 1);
       destinationlist.cards.splice(destination.index, 0, draggingCard)
+      const newState = {
+        ...data,
+        lists:{
+          ...data.lists,
+          [sourceList.id]: destinationlist,
+        },
+      };
+      setData(newState);
+    } else {
+      sourceList.cards.splice(source.index, 1)
+      destinationlist.cards.splice(destination.index, 0, draggingCard)
+
+      const newState = {
+        ...data,
+        lists: {
+          ...data.lists,
+          [sourceList.id]:sourceList,
+          [destinationlist.id]:destinationlist,
+        },
+      };
+      setData(newState);
     }
   }
     return (
