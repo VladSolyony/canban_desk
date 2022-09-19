@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Title.scss'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import { CardTitleContext } from '../../utils/Contexts';
 
-function Title({ title }) {
+function Title({ title, listId }) {
     const [open, setOpen] = useState(false);
+    const [listTitle, setListTitle] = useState(title);
+    const {updateListTitle} = useContext(CardTitleContext)
+
+    const handleOnChange = (e) => {
+        setListTitle(e.target.value);
+    }
+
+    const handleOnBlur = () => {
+        updateListTitle(listTitle, listId);
+        setOpen(false);
+    }
+
     return ( 
         <div>
             {open? (
             <div className='title'>
                 <input 
-                    value={title} 
+                    value={listTitle} 
                     className='title__input'
                     autoFocus
-                    onBlur = {() => setOpen(!open)}
+                    onChange={handleOnChange}
+                    onBlur = {handleOnBlur}
                 />
             </div>
             ) : (
@@ -20,7 +34,7 @@ function Title({ title }) {
                 <h1
                     className='changing-title__text'
                 >
-                    {title}
+                    {listTitle}
                 </h1>
                 <div className="changing-title__icon" onClick={() => setOpen(!open)}>
                     <MoreHorizIcon/>

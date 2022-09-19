@@ -3,17 +3,24 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { CardTitleContext } from '../../utils/Contexts'
 import './InputCard.scss';
 
-function InputCard({ setOpen, listId }) {
-    const { addCard } = useContext(CardTitleContext);
-    const [cardTitle, setCardTitle] = useState('');
+function InputCard({ setOpen, listId, type }) {
+    const { addCard, addList } = useContext(CardTitleContext);
+    const [title, setTitle] = useState('');
 
     const handleOnChange = (e) => {
-        setCardTitle(e.target.value);
+        setTitle(e.target.value);
     };
 
     const handleAddBtn = () => {
-        addCard(cardTitle, listId);
-        setOpen(false);
+        if (type === 'card') {
+            addCard(title, listId);
+            setTitle('');
+            setOpen(false);
+        } else {
+            addList(title);
+            setTitle('');
+            setOpen(false);
+        }
     };
 
     return(
@@ -21,14 +28,14 @@ function InputCard({ setOpen, listId }) {
             <div className='input-card'>
                 <input 
                     onChange={handleOnChange}
-                    value={cardTitle}
-                    placeholder='Enter a title...' 
+                    value={title}
+                    placeholder={type === 'card' ? 'Enter a card title...' : 'Enter list title...'} 
                     className='input-card__input' 
                     autoFocus/>
             </div>
             <div className='button-container'>
                 <button className='button-container__add-button' onClick={handleAddBtn}>
-                    ADDCARD
+                    {type === 'card' ? 'ADD CARD' : 'ADD LIST'}
                 </button>
                 <div className='button-container__clear-button' onClick={() => setOpen(false)}>
                     <ClearIcon />
