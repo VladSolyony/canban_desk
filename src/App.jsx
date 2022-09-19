@@ -4,6 +4,7 @@ import './App.scss';
 import { CardTitleContext } from './utils/Contexts';
 import { v4 as uuid } from "uuid";
 import InputItem from './components/Input/InputItem';
+import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 
 function App() {
 
@@ -73,42 +74,39 @@ function App() {
     setData(newState)
   };
 
-  //   const res = JSON.parse(localStorage.getItem('cards'))
-  //   var listObj = {};
-  //   if (res === null) {
-  //       let itemsArray = []
-  //       listObj.id = newCardId;
-  //       listObj.title = title
-  //       itemsArray.push(listObj)
-  //       localStorage.setItem('cards', JSON.stringify(itemsArray));
-  //   } else {
-  //       listObj.id = newCardId;
-  //       listObj.title = title
-  //       res.push(listObj)
-  //       localStorage.setItem('cards', JSON.stringify(res));
-  //   }
-  // };
+  // const removeCard = (title, listId) => {
 
-  
-  // useEffect(() => {
-  //   const init = JSON.parse(localStorage.getItem('cards'))
-  //   if ( init === null ) {
+  //   const list = data.lists[listId];
+  //   var updatedList = list.cards 
+  //   updatedList
+  //   const newState = {
+  //     ...data,
+  //     lists:{
+  //       ...data.lists,
+  //       [listId]: list,
+  //     }
+  //   };
+  //   setData(newState);
+  // }
 
-  //     var cardsObj = {};
-  //     cardsObj = [];
-    
-  //     var dataObj = {};
-  //     dataObj.lists = {};
-  //     dataObj.listIds = [];
-    
-    
-  //     localStorage.setItem('cards', JSON.stringify(cardsObj))
-  //     localStorage.setItem('data', JSON.stringify(dataObj)) 
-  //   }
-  // }, []);
 
-  return (
+  const onDragEnd = (result) => {
+    const {destination, source, draggableId} = result;
+    const sourceList = data.lists[source.droppableId];
+    const destinationlist = data.lists[destination.droppableId];
+    const draggingCard = sourceList.cards.filter((card) => card.id === draggableId)[0];
+
+    if (!destination) {
+      return;
+    }
+    if (source.droppableId === destination.droppableId) {
+      sourceList.cards.splice(source.index, 1);
+      destinationlist.cards.splice(destination.index, 0, draggingCard)
+    }
+  }
+    return (
     <CardTitleContext.Provider value={{ addCard, addList, updateListTitle }}>
+        <DragDropContext onDragEnd={onDragEnd}>
           <div className="root">
             {data.listIds.map((listId) => {
             const list = data.lists[listId];
@@ -116,7 +114,7 @@ function App() {
             })}
             <InputItem type={'list'}/>
           </div>
-          
+        </DragDropContext>  
     </CardTitleContext.Provider>
   );
 }

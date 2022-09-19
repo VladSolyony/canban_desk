@@ -4,8 +4,10 @@
     cursor: pointer;
     margin: 10px;
     border-radius: 5px;
-    box-shadow: none;
-    transition: .6s ease;
+    box-shadow: 0px 1px 5px rgb(155, 155, 155);
+    transition: .3s ease;
+    height: 40px;
+    width: 280px;
     
         &__text {
             font-size: large;
@@ -15,7 +17,7 @@
 }
 
 .input-item:hover {
-    box-shadow: 0px 1px 5px rgb(155, 155, 155);
-    transition: .6s ease;
+    box-shadow: 0px 1px 2px rgb(155, 155, 155);
+    transition: .3s ease;
 }
 

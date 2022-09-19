@@ -1,5 +1,6 @@
 .input-card {
     display: flex;
+    margin-top: 10px;
 
     &__input {
         box-shadow: 0px 1px 3px rgb(133, 132, 132);
@@ -28,21 +29,25 @@
         margin: 0 10px 0 10px;
         color: white;
         transition: .2s ease;
+        box-shadow: 0px 1px 4px rgb(133, 132, 132);
     }
 
     &__add-button:hover{
-        box-shadow: 0px 1px 3px rgb(133, 132, 132);
+        box-shadow: 0px 1px 1px rgb(133, 132, 132);
         transition: .2s ease;
+        color: rgba(255, 255, 255, 0.803);
     }
 
     &__clear-button{
         cursor: pointer;
         align-self: center;
         transition: .2s ease;
+        box-sizing: border-box;
     }
 
     &__clear-button:hover{
         color: rgb(93, 92, 92);
         transition: .2s ease;
+        font-size: 1rem;
     }
 }

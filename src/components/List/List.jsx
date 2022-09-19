@@ -4,6 +4,7 @@ import Card from '../Card/Card';
 import InputItem from '../Input/InputItem';
 import './List.scss';
 import { v4 as uuid } from "uuid";
+import {DragDropContext, Draggable, Droppable} from 'react-beautiful-dnd'
 
 export default function List({ list }) {
 
@@ -22,9 +23,19 @@ export default function List({ list }) {
     return(
         <div className='list' key={key}>
             <Title title={list.title} listId={list.id}/>
-            {list.cards.map((card) => (
-                <Card key={card.id} card={card}/>
-            ))}
+                <Droppable droppableId={list.id}>
+                    {(provided) => (
+                        <div
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            {list.cards.map((card, index) => (
+                                <Card key={card.id} card={card} index={index}/>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
             <InputItem listId={list.id} type={'card'}/>
         </div>
     );
