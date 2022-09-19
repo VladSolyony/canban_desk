@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import List from './components/List/List'
 import './App.scss';
-import { CardTitleContext } from './utils/Contexts';
+import Contexts from './utils/Contexts';
 import { v4 as uuid } from "uuid";
 import InputItem from './components/Input/InputItem';
-import {DragDropContext} from 'react-beautiful-dnd'
+import {DragDropContext, Droppable} from 'react-beautiful-dnd'
 
 function App() {
 
@@ -96,14 +96,23 @@ function App() {
 
 
   const onDragEnd = (result) => {
-    const {destination, source, draggableId} = result;
-    const sourceList = data.lists[source.droppableId];
-    const destinationlist = data.lists[destination.droppableId];
-    const draggingCard = sourceList.cards.filter((card) => card.id === draggableId)[0];
+    const {destination, source, draggableId, type} = result;
 
     if (!destination) {
       return;
     }
+
+    if(type === "list") {
+      const newListIds = data.listIds;
+      newListIds.splice(source.index, 1);
+      newListIds.splice(destination.index, 0, draggableId);
+      return;
+    }
+
+    const sourceList = data.lists[source.droppableId];
+    const destinationlist = data.lists[destination.droppableId];
+    const draggingCard = sourceList.cards.filter((card) => card.id === draggableId)[0];
+
     if (source.droppableId === destination.droppableId) {
       sourceList.cards.splice(source.index, 1);
       destinationlist.cards.splice(destination.index, 0, draggingCard)
@@ -129,19 +138,24 @@ function App() {
       };
       setData(newState);
     }
-  }
+  };
     return (
-    <CardTitleContext.Provider value={{ addCard, addList, updateListTitle }}>
+    <Contexts.Provider value={{ addCard, addList, updateListTitle }}>
         <DragDropContext onDragEnd={onDragEnd}>
-          <div className="root">
-            {data.listIds.map((listId) => {
-            const list = data.lists[listId];
-            return <List list={list} key={listId}/>;
-            })}
-            <InputItem type={'list'}/>
-          </div>
+            <Droppable droppableId="app" type="list" direction="horizontal" >
+            {(provided) => (
+              <div className="root" ref={provided.innerRef} {...provided.droppableProps}>
+                {data.listIds.map((listId, index) => {
+                const list = data.lists[listId];
+                return <List list={list} key={listId} index={index}/>;
+                })}
+                <InputItem type='list'/>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </DragDropContext>  
-    </CardTitleContext.Provider>
+    </Contexts.Provider>
   );
 }
 

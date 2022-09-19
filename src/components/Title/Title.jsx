@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import './Title.scss'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import { CardTitleContext } from '../../utils/Contexts';
+import Contexts from '../../utils/Contexts';
 
 function Title({ title, listId }) {
     const [open, setOpen] = useState(false);
     const [listTitle, setListTitle] = useState(title);
-    const {updateListTitle} = useContext(CardTitleContext)
+    const {updateListTitle} = useContext(Contexts)
 
     const handleOnChange = (e) => {
         setListTitle(e.target.value);

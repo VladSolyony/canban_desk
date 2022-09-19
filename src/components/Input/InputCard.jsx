@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import ClearIcon from '@material-ui/icons/Clear';
-import { CardTitleContext } from '../../utils/Contexts'
+import Contexts from '../../utils/Contexts'
 import './InputCard.scss';
 
 function InputCard({ setOpen, listId, type }) {
-    const { addCard, addList } = useContext(CardTitleContext);
+    const { addCard, addList } = useContext(Contexts);
     const [title, setTitle] = useState('');
 
     const handleOnChange = (e) => {
