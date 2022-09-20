@@ -4,7 +4,9 @@ import './App.scss';
 import Contexts from './utils/Contexts';
 import { v4 as uuid } from "uuid";
 import InputItem from './components/Input/InputItem';
-import {DragDropContext, Droppable} from 'react-beautiful-dnd'
+import {DragDropContext, Droppable} from 'react-beautiful-dnd';
+import Socials from './components/Socials/Socials';
+import Header from './components/Header/Header';
 
 function App() {
 
@@ -15,13 +17,8 @@ function App() {
             title: 'Editable Title',
             cards: [],
         },
-        'list-2' : {
-          id: 'list-2',
-          title: 'Doing',
-          cards: [],
-      },
     },
-    listIds: ['list-1', 'list-2'],
+    listIds: ['list-1'],
   };
 
   const [data, setData] = useState(initData);
@@ -46,6 +43,31 @@ function App() {
     setData(newState);
   }
 
+
+  const removeCard = (listId, index) => {
+    const list = data.lists[listId];
+    const cardList = list.cards;
+    const result = []
+
+    for (var key in cardList) {
+      if(key != index) {
+        result.push(list.cards[key]);
+      }
+    }
+
+    list.cards = result
+
+    const newState = {
+      ...data,
+      lists:{
+        ...data.lists,
+        [listId]: list,
+      }
+    };
+    setData(newState);
+  }
+
+
   const addList = (title) => {
     const newListId = uuid();
     const newList = {
@@ -64,6 +86,31 @@ function App() {
     setData(newState);
   }
 
+  const removeList = (listId) => {
+    const listIdsArray = [];    
+    const result = {};
+    const ids = data.listIds;
+    const listsArray = data.lists;
+    
+    for (let i = 0; i < ids.length; i++) {
+      if(ids[i] != listId) {
+        listIdsArray.push(ids[i]);
+      }
+    }
+
+    for (var key in listsArray) {
+      if(key != listId) {
+        result[key] = data.lists[key];
+      }
+    }
+
+    const newState = {
+      listIds: listIdsArray,
+      lists: result,
+    }
+    setData(newState);
+  }
+
   const updateListTitle = (title, listId) => {
     const list = data.lists[listId];
     list.title = title;
@@ -78,22 +125,6 @@ function App() {
 
     setData(newState)
   };
-
-  // const removeCard = (title, listId) => {
-
-  //   const list = data.lists[listId];
-  //   var updatedList = list.cards 
-  //   updatedList
-  //   const newState = {
-  //     ...data,
-  //     lists:{
-  //       ...data.lists,
-  //       [listId]: list,
-  //     }
-  //   };
-  //   setData(newState);
-  // }
-
 
   const onDragEnd = (result) => {
     const {destination, source, draggableId, type} = result;
@@ -140,11 +171,12 @@ function App() {
     }
   };
     return (
-    <Contexts.Provider value={{ addCard, addList, updateListTitle }}>
+    <Contexts.Provider value={{ addCard, addList, updateListTitle, removeCard, removeList }}>
+        <Header />
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="app" type="list" direction="horizontal" >
             {(provided) => (
-              <div className="root" ref={provided.innerRef} {...provided.droppableProps}>
+              <div className="app__container" ref={provided.innerRef} {...provided.droppableProps}>
                 {data.listIds.map((listId, index) => {
                 const list = data.lists[listId];
                 return <List list={list} key={listId} index={index}/>;
@@ -155,6 +187,7 @@ function App() {
             )}
           </Droppable>
         </DragDropContext>  
+        <Socials />
     </Contexts.Provider>
   );
 }
