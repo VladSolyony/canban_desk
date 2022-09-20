@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import './Title.scss';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Contexts from '../../utils/Contexts';
 import src from '../../img/del.svg';
 

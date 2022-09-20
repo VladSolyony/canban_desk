@@ -1,12 +1,117 @@
-.header {
-    height: 60px;
-    width: 100%;
-    background-image: url('../../img/bgr.jpg');
+.nav-container{
+  padding: .4rem;
+  background-color: rgba(148, 163, 168, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+      
+  @media(max-width: 900px){
+        justify-content: space-between;
+  }
 
-    &__blur {
-        height: 60px;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.2); // Make sure this color has an opacity of less than 1
-        backdrop-filter: blur(12px); // This be the blur
+  &__header{
+    margin-left: 30px;
+    color: white;
+    font-weight: 500;
+    font-size: 40px;
+    background-color: #a5882a;
+    background-image: linear-gradient(90deg, #cb7228, #1f66b1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    span{
+      font-weight: 700;
+       }
+       @media(max-width: 450px){
+        font-size: 30px;
+        margin-left: 5%;
+       }
+       @media(max-width: 900px){
+        margin-left: 15%;
+  }
+ 
     }
 }
+  a{
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+    background-color: #a5882a;
+    background-image: linear-gradient(90deg, #e5e0db, #dfc6b1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .links{
+    display: none;
+    position: absolute;
+    top: -700px;
+    left: -2000px;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    a{
+      color: white;
+      font-size: 2rem;
+      display: block;
+    }
+    @media(min-width: 900px){
+      position: initial;
+      margin: 0;
+      a{
+        font-size: 1rem;
+        color: white;
+        display: inline;
+      }
+      display: none;
+    }
+  }
+  .links.active{
+    width: 100%;
+    display: block;
+    position: absolute;
+    margin-left: 20%;
+    margin-right: auto;
+    top: 5%;
+    left: 0;
+    right: 0;
+    text-align: start;
+    z-index: 3;
+    a{
+      font-size: 4rem;
+      margin-top: 1rem;
+      color: white;
+      z-index: 3;
+      @media(max-width: 900px){
+        font-size: 3rem;
+      }
+    }
+  }
+  .burger{
+    @media(min-width: 900px){
+      display: none;
+    }
+  }
+
+.initial{
+  background-color: transparent;
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: all .3s ease ;
+  
+  &.active{
+    border-radius: 0 0 80% 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(148, 163, 168, 0.99);
+  }
+}
+
+
+
