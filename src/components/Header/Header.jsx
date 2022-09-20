@@ -18,9 +18,9 @@ function Header() {
         </div>
         <div className={`initial ${clicked ? ' active' : ''}`}>        
         <div className={`links ${clicked ? 'active' : ''}`}>
-          <a onClick={handleClick} href="#h">GitHub</a>
-          <a onClick={handleClick} href="#h">Telegram</a>
-          <a onClick={handleClick} href="#h">Mail</a>
+          <a onClick={handleClick} href="https://github.com/VladSolyony">GitHub</a>
+          <a onClick={handleClick} href="https://t.me/+79204682898">Telegram</a>
+          <a onClick={handleClick} href="mailto: solyonyvlad@gmail.com">Mail</a>
         </div></div>
       </div>
     </>
