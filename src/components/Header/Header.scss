@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'comic';
+    src: url('../../fonts/comic\ shanns.otf');
+}
+
 .nav-container{
   padding: .4rem;
   background-color: rgba(148, 163, 168, 0.8);
@@ -10,16 +15,17 @@
   }
 
   &__header{
+    font-family: font-face;
     margin-left: 30px;
     color: white;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 40px;
     background-color: #a5882a;
     background-image: linear-gradient(90deg, #cb7228, #1f66b1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     span{
-      font-weight: 700;
+      font-weight: 900;
        }
        @media(max-width: 450px){
         font-size: 30px;
